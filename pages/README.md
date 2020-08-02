@@ -1,3 +1,6 @@
-# Welcome to the Home Page!
+# Roblox Royale Camp
+> Welcome to the Roblox Royale Camp companion site!
 
-First things first, click the `Getting Started` article on the sidebar!
+First things first, click the `Day 1` article on the sidebar!
+
+Use this site to help along this camp 😎
