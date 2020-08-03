@@ -14,11 +14,6 @@ First, we will download today's file [here](https://education.roblox.com/assets/
   The method 'WaitForChild' is used by variables that represent folders in our explorer. This method allows us to reach into the folder that it's instance represents and pick a file programmatically.
 </details>
 
-<details>
-  <summary>TBD</summary>
-  TBD
-</details>
-
 ---
 
 Then we will work on programming by following [these](https://education.roblox.com/en-us/resources/battle-royale/timers-and-custom-events) instructions.
@@ -173,5 +168,5 @@ A complete example project of the scripting we have done in class today can be f
 
 ---
 
-See you tomorrow for day 3!
+See you tomorrow for day 4!
 

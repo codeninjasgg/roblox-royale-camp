@@ -1,22 +1,10 @@
-# Online Docs Template 🌐
-> A template for creating documentation with markdown files online.
+# Roblox Royale Camp
+> A companion site for the Roblox Royale Camp
 
-[![GitHub forks](https://img.shields.io/github/forks/EthanThatOneKid/online-docs-template?style=social)](https://github.com/EthanThatOneKid/online-docs-template/fork)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/EthanThatOneKid/online-docs-template/Deploy)](https://github.com/EthanThatOneKid/online-docs-template/actions?query=workflow%3ADeploy)
-![GitHub repo size](https://img.shields.io/github/repo-size/EthanThatOneKid/online-docs-template)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/codeninjasgg/roblox-royale-camp/Deploy)](https://github.com/codeninjasgg/roblox-royale-camp/actions?query=workflow%3ADeploy)
+![GitHub repo size](https://img.shields.io/github/repo-size/codeninjasgg/roblox-royale-camp)
 
-Check out the [demo](https://ethanthatonekid.github.io/online-docs-template/)!
-
-## Getting Started 🍎
-1. Create a new repository using this one as a [template](https://github.com/EthanThatOneKid/online-docs-template/generate).
-1. Clone your new repository to your desktop.
-1. Initialize your repository...
-	1. Install the dependencies with `npm i`.
-	1. Rename [`.env.sample`](.env.sample) to `.env` and fill it with the appropriate info.
-	1. Customize the metadata within your [`package.json`](package.json).
-1. Make it your own by editing the [`pages`](pages) directory!
-
-> 💡 Note: The [`README.md`](pages/README.md) file in the [`pages`](pages) directory represents the *homepage* of the site!
+Visit the [site](https://codeninjasgg.github.io/roblox-royale-camp/)!
 
 ## Editing Documents 🖊
 
@@ -42,9 +30,6 @@ Check out the [demo](https://ethanthatonekid.github.io/online-docs-template/)!
 
 ---
 
-[![Buy me a Coffee](https://img.shields.io/badge/buy%20me%20a-coffee-%23FF813F)][bmac]
+Created with ☕ by [Code Ninjas Garden Grove][creator_site]
 
-Drafted with 🧠 by [EthanThatOneKid][creator_site]
-
-[bmac]: http://buymeacoff.ee/etok
-[creator_site]: http://ethandavidson.com/
+[creator_site]: #
