@@ -47,7 +47,7 @@
   </a>
   <header class="px-4 pt-3 sm:px-6 sm:pt-4">
     <div class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-      Last published 8/2/2020,<br> 11:50:43 AM PST.
+      Last published 8/3/2020,<br> 9:56:49 AM PST.
     </div>
   </header>
 </div>
@@ -64,6 +64,10 @@
         
         <li class="ml-3">
             <a class="underline hover:text-blue-500" href="https://codeninjasgg.github.io/roblox-royale-camp/Day%202">Day 2</a>
+        </li>
+        
+        <li class="ml-3">
+            <a class="underline hover:text-blue-500" href="https://codeninjasgg.github.io/roblox-royale-camp/Day%203">Day 3</a>
         </li>
         
         <li class="ml-3">
@@ -97,7 +101,7 @@
   </a>
   <header class="px-4 pt-3 sm:px-6 sm:pt-4">
     <div class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-      Last published 8/2/2020,<br> 11:50:43 AM PST.
+      Last published 8/3/2020,<br> 9:56:49 AM PST.
     </div>
   </header>
 </div>
@@ -114,6 +118,10 @@
         
         <li class="ml-3">
             <a class="underline hover:text-blue-500" href="https://codeninjasgg.github.io/roblox-royale-camp/Day%202">Day 2</a>
+        </li>
+        
+        <li class="ml-3">
+            <a class="underline hover:text-blue-500" href="https://codeninjasgg.github.io/roblox-royale-camp/Day%203">Day 3</a>
         </li>
         
         <li class="ml-3">
@@ -154,12 +162,79 @@
               <div>
                 <div class="markdown-body"><h1 id="day-2">Day 2</h1>
 <h2 id="overview-👀">Overview 👀</h2>
-<p>Today we are going to add scripts that manage the game&#39;s players start and stop the game&#39;s timer feature.</p>
+<p>Today we are going to create the game loop by adding scripts that manage the game&#39;s players, starts and stops the game&#39;s timer feature, and other important mechanics.</p>
 <h2 id="follow-along-👍">Follow Along! 👍</h2>
+<p>First, we will download today&#39;s file <a href="https://education.roblox.com/assets/blt8fcd8f6d09c6c78e/roundBasedGame_lesson1_final.rbxl?disposition=inline">here</a>. Once downloaded, let&#39;s open it up in Roblox studio and begin our quest for today.</p>
+<h3 id="fun-quiz-🧠">Fun Quiz 🧠</h3>
 <blockquote>
-<p><a href="https://trello.com/c/GfEOszK9/24-roblox-royale-training">https://trello.com/c/GfEOszK9/24-roblox-royale-training</a></p>
+<p>Here are some quiz questions that we will be able to answer as we complete today&#39;s instructions.</p>
 </blockquote>
+<details>
+  <summary>What is the difference between a normal script and a module script?</summary>
+  Module scripts are not ran automatically; only when they are summoned (via the 'require' statement).
+  Utilizing module scripts organizes your code in a clean, professional manner.
+</details>
+
+<details>
+  <summary>What is the purpose of our GameManager script?</summary>
+  It actually is responsible for running the game loop itself!
+  It utilizes our MatchManager and GameSettings modules to run the loop.
+</details>
+
+<details>
+  <summary>What is the purpose of our MatchManager  script?</summary>
+  The MatchManager script contains functions that are responsible for sending players into an arena and keeping track of time in a match.
+</details>
+
+<hr>
+<p>Then we will work on programming the basic functionality of our game&#39;s game loop by following <a href="https://education.roblox.com/en-us/resources/battle-royale/coding-the-game-loop">these</a> instructions.</p>
+<p>When we are done, our scripts should resemble the following samples:</p>
+<h3 id="serverstorage--modulescripts--gamesettings"><code>ServerStorage &gt; ModuleScripts &gt; GameSettings</code></h3>
+<pre><code class="language-lua">local GameSettings = {}
+
+-- Game Variables
+GameSettings.intermissionDuration = 5
+GameSettings.matchDuration = 10
+GameSettings.minimumPlayers = 2
+GameSettings.transitionTime = 5
+
+return GameSettings</code></pre>
+<h3 id="serverstorage--modulescripts--matchmanager"><code>ServerStorage &gt; ModuleScripts &gt; MatchManager</code></h3>
+<pre><code class="language-lua">local MatchManager = {}
+
+function MatchManager.prepareGame()
+    print(&quot;Game starting!&quot;)
+end
+
+return MatchManager</code></pre>
+<h3 id="serverscriptservice--gamemanager"><code>ServerScriptService &gt; GameManager</code></h3>
+<pre><code class="language-lua">-- Services
+local ServerStorage = game:GetService(&quot;ServerStorage&quot;)
+local Players = game:GetService(&quot;Players&quot;)
+
+-- Module Scripts
+local moduleScripts = ServerStorage:WaitForChild(&quot;ModuleScripts&quot;)
+local matchManager = require(moduleScripts:WaitForChild(&quot;MatchManager&quot;))
+local gameSettings = require(moduleScripts:WaitForChild(&quot;GameSettings&quot;))
+
+while true do
+    repeat
+        wait(gameSettings.intermissionDuration)
+        print(&quot;Restarting intermission&quot;)
+    until Players.NumPlayers &gt;= gameSettings.minimumPlayers
+    print(&quot;Intermission over&quot;)
+    wait(gameSettings.transitionTime)
+    matchManager.prepareGame()
+end</code></pre>
+<hr>
+<p>A complete example project of the scripting we have done in class today can be found <a href="https://education.roblox.com/assets/blt7fffb3d25cb1a1dd/battleroyale_lesson2_final.rbxl?disposition=inline">here</a>.</p>
 <h2 id="optional-homework-📄">Optional Homework 📄</h2>
+<blockquote>
+<p>Read the following articles to acheive a full understanding of what we are working on for day 3.</p>
+</blockquote>
+<ul>
+<li><a href="https://education.roblox.com/en-us/resources/battle-royale/managing-players">Managing Players</a></li>
+</ul>
 <hr>
 <p>See you tomorrow for day 3!</p>
 </div>
