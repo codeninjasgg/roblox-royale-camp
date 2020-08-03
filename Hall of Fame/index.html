@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Roblox Royale | Day 3</title>
+  <title>Roblox Royale | Hall of Fame</title>
   <link rel="icon" href="https://github.com/codeninjasgg/roblox-royale-camp/blob/master/static/favicon.svg?raw=true"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
   <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
@@ -156,166 +156,35 @@
         <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none" tabindex="0">
           <div class="max-w-screen-lg px-4 sm:px-6 md:px-8 pb-12">
             <div class="py-6">
-              <a href="https://github.com/codeninjasgg/roblox-royale-camp/edit/master/pages/Day 3.md">
-                📝 github.com/codeninjasgg/roblox-royale-camp/edit/master/pages/Day 3.md
+              <a href="https://github.com/codeninjasgg/roblox-royale-camp/edit/master/pages/Hall of Fame.md">
+                📝 github.com/codeninjasgg/roblox-royale-camp/edit/master/pages/Hall of Fame.md
               </a>
               <div>
-                <div class="markdown-body"><h1 id="day-3">Day 3</h1>
-<h2 id="overview-👀">Overview 👀</h2>
-<p>Today we will utilize <em>BindableEvents</em> and script out the logic for our game&#39;s timer.</p>
-<h2 id="follow-along-👍">Follow Along! 👍</h2>
-<p>First, we will download today&#39;s file <a href="https://education.roblox.com/assets/bltf337a667bbe03989/battleroyale_lesson3_final.rbxl?disposition=inline">here</a>. Once downloaded, let&#39;s open it up in Roblox studio and begin our quest for today.</p>
-<h3 id="fun-quiz-🧠">Fun Quiz 🧠</h3>
+                <div class="markdown-body"><h1 id="roblox-royale-ninjas-🐱👤">Roblox Royale Ninjas 🐱‍👤</h1>
+<p>This page is a hall of fame for all of the students who have completed the Roblox Royale Camp.</p>
 <blockquote>
-<p>Here are some quiz questions that we will be able to answer as we complete today&#39;s instructions.</p>
+<p>💡 Hint: Click on a student&#39;s works to play their completed Roblox Royale games!</p>
 </blockquote>
-<details>
-  <summary>What does 'WaitForChild' do?</summary>
-  The method 'WaitForChild' is used by variables that represent folders in our explorer. This method allows us to reach into the folder that it's instance represents and pick a file programmatically.
-</details>
-
-<hr>
-<p>Then we will work on programming by following <a href="https://education.roblox.com/en-us/resources/battle-royale/timers-and-custom-events">these</a> instructions.</p>
-<p>When we are done, our scripts should resemble the following samples:</p>
-<h3 id="serverscriptservice--gamemanager"><code>ServerScriptService &gt; GameManager</code></h3>
-<pre><code class="language-lua">-- Services
-local ServerStorage = game:GetService(&quot;ServerStorage&quot;)
-local Players = game:GetService(&quot;Players&quot;)
-
--- Module Scripts
-local moduleScripts = ServerStorage:WaitForChild(&quot;ModuleScripts&quot;)
-local matchManager = require(moduleScripts:WaitForChild(&quot;MatchManager&quot;))
-local gameSettings = require(moduleScripts:WaitForChild(&quot;GameSettings&quot;))
-
--- Events
-local events = ServerStorage:WaitForChild(&quot;Events&quot;)
-local matchEnd = events:WaitForChild(&quot;MatchEnd&quot;)
-
-while true do
-    repeat
-        wait(gameSettings.intermissionDuration)
-        print(&quot;Restarting intermission&quot;)
-    until Players.NumPlayers &gt;= gameSettings.minimumPlayers
-
-    print(&quot;Intermission over&quot;)
-    wait(gameSettings.transitionTime)
-
-    matchManager.prepareGame()
-    -- Placeholder wait for the length of the game.
-    matchEnd.Event:Wait()
-
-end</code></pre>
-<h3 id="serverstorage--modulescripts--matchmanager"><code>ServerStorage &gt; ModuleScripts &gt; MatchManager</code></h3>
-<pre><code class="language-lua">local MatchManager = {}
-
--- Services
-local ServerStorage = game:GetService(&quot;ServerStorage&quot;)
-
--- Module Scripts
-local moduleScripts = ServerStorage:WaitForChild(&quot;ModuleScripts&quot;)
-local playerManager = require(moduleScripts:WaitForChild(&quot;PlayerManager&quot;))
-local gameSettings = require(moduleScripts:WaitForChild(&quot;GameSettings&quot;))
-local timer = require(moduleScripts:WaitForChild(&quot;Timer&quot;))
-
--- Events
-local events = ServerStorage:WaitForChild(&quot;Events&quot;)
-local matchStart = events:WaitForChild(&quot;MatchStart&quot;)
-local matchEnd = events:WaitForChild(&quot;MatchEnd&quot;)
-
--- Creates a new timer object to be used to keep track of match time. 
-local myTimer = timer.new()
-
--- Local Functions
-local function timeUp()
-    print(&quot;Time is up!&quot;)
-end
-
-local function startTimer()
-    print(&quot;Timer started&quot;)
-    myTimer:start(gameSettings.matchDuration)
-    myTimer.finished:Connect(timeUp)    
-end
-
--- Module Functions
-function MatchManager.prepareGame()
-    playerManager.sendPlayersToMatch()
-    matchStart:Fire()
-end
-
-matchStart.Event:Connect(startTimer)
-
-return MatchManager</code></pre>
-<h3 id="serverstorage--modulescripts--timer"><code>ServerStorage &gt; ModuleScripts &gt; Timer</code></h3>
-<pre><code class="language-lua">local Timer = {}
-Timer.__index = Timer
-
-function Timer.new()
-    local self = setmetatable({}, Timer)
-
-    self._finishedEvent = Instance.new(&quot;BindableEvent&quot;)
-    self.finished = self._finishedEvent.Event
-
-    self._running = false
-    self._startTime = nil
-    self._duration = nil
-
-    return self
-end
-
-function Timer:start(duration)
-    if not self._running then
-        local timerThread = coroutine.wrap(function()
-            self._running = true
-            self._duration = duration
-            self._startTime = tick()
-            while self._running and tick() - self._startTime &lt; duration do
-                wait()
-            end
-            local completed = self._running
-            self._running = false
-            self._startTime = nil
-            self._duration = nil
-            self._finishedEvent:Fire(completed)
-        end)
-        timerThread()
-    else
-        warn(&quot;Warning: timer could not start again as it is already running.&quot;)
-    end
-end
-
-function Timer:getTimeLeft()
-    if self._running then
-        local now = tick()
-        local timeLeft = self._startTime + self._duration - now
-        if timeLeft &lt; 0 then
-            timeLeft = 0
-        end
-        return timeLeft
-    else
-        warn(&quot;Warning: could not get remaining time, timer is not running.&quot;)
-    end
-end
-
-function Timer:isRunning()
-    return self._running
-end
-
-function Timer:stop()
-    self._running = false
-end
-
-return Timer</code></pre>
-<hr>
-<p>A complete example project of the scripting we have done in class today can be found <a href="https://education.roblox.com/assets/blt03dc7fe967c0c5f3/battleroyale_lesson4_final.rbxl?disposition=inline">here</a>.</p>
-<h2 id="optional-homework-📄">Optional Homework 📄</h2>
-<blockquote>
-<p>Read the following articles to acheive a full understanding of what we are working on for day 4.</p>
-</blockquote>
+<h2 id="session-3-ninjas">Session 3 Ninjas</h2>
 <ul>
-<li><a href="https://education.roblox.com/en-us/resources/battle-royale/displaying-information-with-gui">Creating a GUI (Graphical User Interface)</a>: <a href="https://education.roblox.com/assets/blt11fb316f976718ea/battleroyale_lesson5_final.rbxl?disposition=inline">Complete</a></li>
+<li><code>Markus</code>: <a href="https://www.roblox.com/games/5491503078/the-best-taco">Obby</a></li>
+<li><code>Parker</code>: <a href="https://www.roblox.com/games/5491510493/Number">Obby</a></li>
+<li><code>Dylan</code>: <a href="https://www.roblox.com/games/5491639616/Another-Obby">Obby</a></li>
 </ul>
-<hr>
-<p>See you tomorrow for day 4!</p>
+<h2 id="session-2-ninjas">Session 2 Ninjas</h2>
+<ul>
+<li><code>Mason</code>: <a href="https://www.roblox.com/games/5471339932/pixelmaster0222s-Place-Number-1">Battle Royale</a></li>
+<li><code>Omri</code>: <a href="https://www.roblox.com/games/5471340030/doge-royale">Battle Royale</a></li>
+<li><code>Emaan</code>: <a href="https://www.roblox.com/games/5471344498/super-game">Battle Royale</a></li>
+<li><code>Abby</code>: <a href="https://www.roblox.com/games/5471340049/tree-roblox">Battle Royale</a></li>
+</ul>
+<h2 id="session-1-ninjas">Session 1 Ninjas</h2>
+<ul>
+<li><code>Toby</code>: <a href="https://www.roblox.com/games/5366203536/Robloxcodecamp12s-Place-Number-26">Battle Royale</a></li>
+<li><code>Cody</code>: <a href="https://web.roblox.com/games/5350648078/Untitled-Game">Battle Royale</a></li>
+<li><code>Tyler</code>: <a href="https://web.roblox.com/games/5366383913/Place-Number">Battle Royale</a></li>
+<li><code>Kai</code>: <a href="https://web.roblox.com/games/5366382460/WAR">Battle Royale</a></li>
+</ul>
 </div>
               </div>
             </div>
