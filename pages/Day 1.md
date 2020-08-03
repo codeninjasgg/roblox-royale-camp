@@ -20,7 +20,7 @@ Now, your obby and your basic Roblox Studio training should be complete. Downloa
 
 If there is enough time in the session, continue with a *bonus step*: [Publish and Playtest](https://education.roblox.com/en-us/resources/intro-to-studio-publish).
 
-Upon completing these steps, a playable Roblox game should be publicly available and ready to share and play with friends and family.
+Upon completing these steps, a playable Roblox game should be publicly available and ready to share and play with friends and family. Just go to [roblox.com](https://www.roblox.com/home), open your profile, click the 'Creations' tab, and find the game to share its link with fellow students, friends, and family members.
 
 ## Optional Homework 📄
 First, play [Island Royale](https://web.roblox.com/games/1320186298/ARENA-Island-Royale) to understand what the battle royale game genre is all about.
