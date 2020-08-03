@@ -4,12 +4,9 @@ This page is a hall of fame for all of the students who have completed the Roblo
 > 💡 Hint: Click on a student's name to play their completed Roblox Royale game!
 
 ## Session 3 Ninjas
-* [Markus](#)
-  * [Obby](https://www.roblox.com/games/5491503078/the-best-taco)
-* [Parker](#)
-  * [Obby](https://www.roblox.com/games/5491510493/Number)
-* [Dylan](#)
-  * [Obby](https://www.roblox.com/games/5491639616/Another-Obby)
+* [Markus](#): [Obby](https://www.roblox.com/games/5491503078/the-best-taco)
+* [Parker](#): [Obby](https://www.roblox.com/games/5491510493/Number)
+* [Dylan](#): [Obby](https://www.roblox.com/games/5491639616/Another-Obby)
 
 ## Session 2 Ninjas
 * [Mason](https://www.roblox.com/games/5471339932/pixelmaster0222s-Place-Number-1)
