@@ -49,7 +49,7 @@ return GameSettings
 ```lua
 local MatchManager = {}
  
-function MatchManager.prepareGame()
+function MatchManager.preparePlayers()
 	print("Game starting!")
 end
  

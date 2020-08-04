@@ -10,17 +10,17 @@ First, we will download today's file [here](https://education.roblox.com/assets/
 > Here are some quiz questions that we will be able to answer as we complete today's instructions.
 
 <details>
-  <summary>In this simplified battle royale, what are the two end-conditions?</summary>
+  <summary>In this battle royale, what are the two end-conditions?</summary>
   The match will reset when either there are less than two players remaining or when our timer runs out of time.
 </details>
 
 <details>
-  <summary>In this simplified battle royale, what should happen when a player is defeated?</summary>
+  <summary>In this battle royale, what should happen when a player is defeated?</summary>
   That player should be sent to the lobby.
 </details>
 
 <details>
-  <summary>In this simplified battle royale, what should happen when the match resets?</summary>
+  <summary>In this battle royale, what should happen when the match resets?</summary>
   The timer must be reset and all players (including the winner) must be sent back to the lobby with full health.
 </details>
 
