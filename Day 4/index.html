@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Roblox Royale | Day 3</title>
+  <title>Roblox Royale | Day 4</title>
   <link rel="icon" href="https://github.com/codeninjasgg/roblox-royale-camp/blob/master/static/favicon.svg?raw=true"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
   <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
@@ -172,31 +172,36 @@
         <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none" tabindex="0">
           <div class="max-w-screen-lg px-4 sm:px-6 md:px-8 pb-12">
             <div class="py-6">
-              <a href="https://github.com/codeninjasgg/roblox-royale-camp/edit/master/pages/Day 3.md">
-                📝 github.com/codeninjasgg/roblox-royale-camp/edit/master/pages/Day 3.md
+              <a href="https://github.com/codeninjasgg/roblox-royale-camp/edit/master/pages/Day 4.md">
+                📝 github.com/codeninjasgg/roblox-royale-camp/edit/master/pages/Day 4.md
               </a>
               <div>
-                <div class="markdown-body"><h1 id="day-3">Day 3</h1>
+                <div class="markdown-body"><h1 id="day-4">Day 4</h1>
 <h2 id="overview-👀">Overview 👀</h2>
-<p>Today we will utilize <em>BindableEvents</em> and script out the logic for our game&#39;s timer.</p>
+<p>Today we will write scripts that handle managing players and the state of the game.</p>
 <h2 id="follow-along-👍">Follow Along! 👍</h2>
-<p>First, we will download today&#39;s file <a href="https://education.roblox.com/assets/bltf337a667bbe03989/battleroyale_lesson3_final.rbxl?disposition=inline">here</a>. Once downloaded, let&#39;s open it up in Roblox studio and begin our quest for today.</p>
+<p>First, we will download today&#39;s file <a href="https://education.roblox.com/assets/blt11fb316f976718ea/battleroyale_lesson5_final.rbxl?disposition=inline">here</a>. Once downloaded, let&#39;s open it up in Roblox studio and begin our quest for today.</p>
 <h3 id="fun-quiz-🧠">Fun Quiz 🧠</h3>
 <blockquote>
 <p>Here are some quiz questions that we will be able to answer as we complete today&#39;s instructions.</p>
 </blockquote>
 <details>
-  <summary>What does 'WaitForChild' do?</summary>
-  The 'WaitForChild' method is used by variables that represent folders in our explorer. This method allows us to reach into the folder that it's instance represents and pick a file programmatically.
+  <summary>In this battle royale, what are the two end-conditions?</summary>
+  The match will reset when either there are less than two players remaining or when our timer runs out of time.
 </details>
 
 <details>
-  <summary>What does 'Wait' do?</summary>
-    The 'Wait' method stops the script from continuing until the event has been resolved (completed).
+  <summary>In this battle royale, what should happen when a player is defeated?</summary>
+  That player should be sent to the lobby.
+</details>
+
+<details>
+  <summary>In this battle royale, what should happen when the match resets?</summary>
+  The timer must be reset and all players (including the winner) must be sent back to the lobby with full health.
 </details>
 
 <hr>
-<p>Then we will work on programming by following <a href="https://education.roblox.com/en-us/resources/battle-royale/timers-and-custom-events">these</a> instructions.</p>
+<p>Then we will work on programming by following <a href="https://education.roblox.com/en-us/resources/battle-royale/ending-matches">these</a> instructions.</p>
 <p>When we are done, our scripts should resemble the following samples:</p>
 <h3 id="serverscriptservice--gamemanager"><code>ServerScriptService &gt; GameManager</code></h3>
 <pre><code class="language-lua">-- Services
@@ -207,30 +212,32 @@ local Players = game:GetService(&quot;Players&quot;)
 local moduleScripts = ServerStorage:WaitForChild(&quot;ModuleScripts&quot;)
 local matchManager = require(moduleScripts:WaitForChild(&quot;MatchManager&quot;))
 local gameSettings = require(moduleScripts:WaitForChild(&quot;GameSettings&quot;))
+local displayManager = require(moduleScripts:WaitForChild(&quot;DisplayManager&quot;))
 
 -- Events
 local events = ServerStorage:WaitForChild(&quot;Events&quot;)
 local matchEnd = events:WaitForChild(&quot;MatchEnd&quot;)
 
 while true do
+    displayManager.updateStatus(&quot;Waiting for Players&quot;)
+
     repeat
         wait(gameSettings.intermissionDuration)
-        print(&quot;Restarting intermission&quot;)
     until Players.NumPlayers &gt;= gameSettings.minimumPlayers
 
-    print(&quot;Intermission over&quot;)
+    displayManager.updateStatus(&quot;Get ready!&quot;)
     wait(gameSettings.transitionTime)
 
     matchManager.prepareGame()
-    -- Placeholder wait for the length of the game.
-    matchEnd.Event:Wait()
-
+    local endState = matchEnd.Event:Wait()
+    print(&quot;Game ended with: &quot; .. endState)
 end</code></pre>
 <h3 id="serverstorage--modulescripts--matchmanager"><code>ServerStorage &gt; ModuleScripts &gt; MatchManager</code></h3>
 <pre><code class="language-lua">local MatchManager = {}
 
 -- Services
 local ServerStorage = game:GetService(&quot;ServerStorage&quot;)
+local ReplicatedStorage = game:GetService(&quot;ReplicatedStorage&quot;)
 
 -- Module Scripts
 local moduleScripts = ServerStorage:WaitForChild(&quot;ModuleScripts&quot;)
@@ -243,18 +250,34 @@ local events = ServerStorage:WaitForChild(&quot;Events&quot;)
 local matchStart = events:WaitForChild(&quot;MatchStart&quot;)
 local matchEnd = events:WaitForChild(&quot;MatchEnd&quot;)
 
+-- Values
+local displayValues = ReplicatedStorage:WaitForChild(&quot;DisplayValues&quot;)
+local timeLeft = displayValues:WaitForChild(&quot;TimeLeft&quot;)
+
 -- Creates a new timer object to be used to keep track of match time. 
 local myTimer = timer.new()
 
 -- Local Functions
+local function stopTimer()
+    myTimer:stop()
+end
+
 local function timeUp()
-    print(&quot;Time is up!&quot;)
+    matchEnd:Fire(gameSettings.endStates.TimerUp)
 end
 
 local function startTimer()
     print(&quot;Timer started&quot;)
     myTimer:start(gameSettings.matchDuration)
     myTimer.finished:Connect(timeUp)    
+
+    while myTimer:isRunning() do
+        -- Adding +1 makes sure the timer display ends at 1 instead of 0. 
+        timeLeft.Value = (math.floor(myTimer:getTimeLeft() + 1))
+        -- By not setting the time for wait, it offers more accurate looping  
+        wait()
+    end
+
 end
 
 -- Module Functions
@@ -264,79 +287,122 @@ function MatchManager.prepareGame()
 end
 
 matchStart.Event:Connect(startTimer)
+matchEnd.Event:Connect(stopTimer)
 
 return MatchManager</code></pre>
-<h3 id="serverstorage--modulescripts--timer"><code>ServerStorage &gt; ModuleScripts &gt; Timer</code></h3>
-<pre><code class="language-lua">local Timer = {}
-Timer.__index = Timer
+<h3 id="serverstorage--modulescripts--gamesettings"><code>ServerStorage &gt; ModuleScripts &gt; GameSettings</code></h3>
+<pre><code class="language-lua">local GameSettings = {}
 
-function Timer.new()
-    local self = setmetatable({}, Timer)
+-- Game Variables
+GameSettings.intermissionDuration = 5
+GameSettings.matchDuration = 10
+GameSettings.minimumPlayers = 2
+GameSettings.transitionTime = 5
 
-    self._finishedEvent = Instance.new(&quot;BindableEvent&quot;)
-    self.finished = self._finishedEvent.Event
+-- Possible ways that the game can end.
+GameSettings.endStates = {
+    TimerUp = &quot;TimerUp&quot;,
+    FoundWinner = &quot;FoundWinner&quot;
+}
 
-    self._running = false
-    self._startTime = nil
-    self._duration = nil
+return GameSettings</code></pre>
+<h3 id="serverstorage--modulescripts--playermanager"><code>ServerStorage &gt; ModuleScripts &gt; PlayerManager</code></h3>
+<pre><code class="language-lua">local PlayerManager = {}
 
-    return self
-end
+-- Services
+local Players = game:GetService(&quot;Players&quot;)
+local ServerStorage = game:GetService(&quot;ServerStorage&quot;)
+local ReplicatedStorage = game:GetService(&quot;ReplicatedStorage&quot;)
 
-function Timer:start(duration)
-    if not self._running then
-        local timerThread = coroutine.wrap(function()
-            self._running = true
-            self._duration = duration
-            self._startTime = tick()
-            while self._running and tick() - self._startTime &lt; duration do
-                wait()
-            end
-            local completed = self._running
-            self._running = false
-            self._startTime = nil
-            self._duration = nil
-            self._finishedEvent:Fire(completed)
-        end)
-        timerThread()
-    else
-        warn(&quot;Warning: timer could not start again as it is already running.&quot;)
+-- Modules
+local moduleScripts = ServerStorage:WaitForChild(&quot;ModuleScripts&quot;)
+local gameSettings = require(moduleScripts:WaitForChild(&quot;GameSettings&quot;))
+
+-- Events
+local events = ServerStorage:WaitForChild(&quot;Events&quot;)
+local matchEnd = events:WaitForChild(&quot;MatchEnd&quot;)
+
+-- Map Variables
+local lobbySpawn = workspace.Lobby.StartSpawn
+local arenaMap = workspace.Arena
+local spawnLocations = arenaMap.SpawnLocations
+
+-- Values
+local displayValues = ReplicatedStorage:WaitForChild(&quot;DisplayValues&quot;)
+local playersLeft = displayValues:WaitForChild(&quot;PlayersLeft&quot;)
+
+-- Player Variables
+local activePlayers = {}
+local playerWeapon = ServerStorage.Weapon
+
+-- Local Functions
+local function checkPlayerCount()
+    if #activePlayers == 1 then
+        matchEnd:Fire(gameSettings.endStates.FoundWinner)
     end
 end
 
-function Timer:getTimeLeft()
-    if self._running then
-        local now = tick()
-        local timeLeft = self._startTime + self._duration - now
-        if timeLeft &lt; 0 then
-            timeLeft = 0
+local function removeActivePlayer(player)
+    for playerKey, whichPlayer in pairs(activePlayers) do
+        if whichPlayer == player then
+            table.remove(activePlayers, playerKey)
+            playersLeft.Value = #activePlayers
+            checkPlayerCount()
         end
-        return timeLeft
-    else
-        warn(&quot;Warning: could not get remaining time, timer is not running.&quot;)
     end
 end
 
-function Timer:isRunning()
-    return self._running
+local function respawnPlayerInLobby(player)
+    player.RespawnLocation = lobbySpawn
+    player:LoadCharacter()
 end
 
-function Timer:stop()
-    self._running = false
+
+local function onPlayerJoin(player)
+    player.RespawnLocation = lobbySpawn
 end
 
-return Timer</code></pre>
+local function preparePlayer(player, whichSpawn)
+    player.RespawnLocation = whichSpawn
+    player:LoadCharacter()
+
+    local character = player.Character or player.CharacterAdded:Wait()
+    local sword = playerWeapon:Clone()
+    sword.Parent = character
+
+    local humanoid = character:WaitForChild(&quot;Humanoid&quot;)
+
+    humanoid.Died:Connect(function()
+        respawnPlayerInLobby(player)
+        removeActivePlayer(player)
+    end)
+
+end
+
+-- Module Functions 
+function PlayerManager.sendPlayersToMatch()
+    local arenaSpawns = spawnLocations:GetChildren()
+
+    for playerKey, whichPlayer in pairs(Players:GetPlayers()) do
+        table.insert(activePlayers,whichPlayer)    
+        local spawnLocation = arenaSpawns[1]
+        preparePlayer(whichPlayer, spawnLocation)
+        table.remove(arenaSpawns, 1)
+    end
+
+    playersLeft.Value = #activePlayers
+end
+
+-- Events
+Players.PlayerAdded:Connect(onPlayerJoin)
+
+return PlayerManager</code></pre>
 <hr>
 <p>A complete example project of the scripting we have done in class today can be found <a href="https://education.roblox.com/assets/blt03dc7fe967c0c5f3/battleroyale_lesson4_final.rbxl?disposition=inline">here</a>.</p>
 <h2 id="optional-homework-📄">Optional Homework 📄</h2>
-<blockquote>
-<p>Read the following articles to acheive a full understanding of what we are working on for day 4.</p>
-</blockquote>
-<ul>
-<li><a href="https://education.roblox.com/en-us/resources/battle-royale/displaying-information-with-gui">Creating a GUI (Graphical User Interface)</a>: <a href="https://education.roblox.com/assets/blt11fb316f976718ea/battleroyale_lesson5_final.rbxl?disposition=inline">Complete</a></li>
-</ul>
+<p>Download <a href="https://education.roblox.com/assets/bltb5d7401ffa20b600/battleroyale_lesson6_final.rbxl?disposition=inline">this</a> file and open it in Roblox Studio. Publish it to Roblox (<code>Alt+P</code>) as your final Roblox Royale game, so name it something cool! Change the way that the arena looks by changing the colors, materials, and shapes of existing parts and by adding new parts from the toolbox.</p>
 <hr>
-<p>See you tomorrow for day 4!</p>
+<p>See you tomorrow for day 5, our final session!</p>
 </div>
               </div>
             </div>
