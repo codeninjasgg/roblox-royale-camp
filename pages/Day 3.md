@@ -11,7 +11,12 @@ First, we will download today's file [here](https://education.roblox.com/assets/
 
 <details>
   <summary>What does 'WaitForChild' do?</summary>
-  The method 'WaitForChild' is used by variables that represent folders in our explorer. This method allows us to reach into the folder that it's instance represents and pick a file programmatically.
+  The 'WaitForChild' method is used by variables that represent folders in our explorer. This method allows us to reach into the folder that it's instance represents and pick a file programmatically.
+</details>
+
+<details>
+  <summary>What does 'Wait' do?</summary>
+	The 'Wait' method stops the script from continuing until the event has been resolved (completed).
 </details>
 
 ---
