@@ -169,7 +169,7 @@ A complete example project of the scripting we have done in class today can be f
 ## Optional Homework 📄
 > Read the following articles to acheive a full understanding of what we are working on for day 4.
 
-* [Creating a GUI (Graphical User Interface)](https://education.roblox.com/en-us/resources/battle-royale/displaying-information-with-gui): [Complete](https://education.roblox.com/assets/blt11fb316f976718ea/battleroyale_lesson5_final.rbxl?disposition=inline)
+* [Creating a GUI (Graphical User Interface)](https://education.roblox.com/en-us/resources/battle-royale/displaying-information-with-gui)
 
 ---
 
