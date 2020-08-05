@@ -15,6 +15,11 @@ First, we will download today's file [here](https://education.roblox.com/assets/
 </details>
 
 <details>
+  <summary>What does 'Connect' do?</summary>
+	The 'Connect' method takes a function as its argument and calls it once the event is resolved (completed).
+</details>
+
+<details>
   <summary>What does 'Wait' do?</summary>
 	The 'Wait' method stops the script from continuing until the event has been resolved (completed).
 </details>
