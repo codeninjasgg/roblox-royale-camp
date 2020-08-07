@@ -4,11 +4,10 @@ This page is a hall of fame for all of the students who have completed the Roblo
 > 💡 Hint: Click on a student's works to play their completed Roblox Royale games!
 
 ## Session 3 Ninjas
-* `Markus`: [Obby](https://www.roblox.com/games/5491503078/the-best-taco)
-* `Parker`: [Obby](https://www.roblox.com/games/5491510493/Number)
-* `Dylan`: [Obby](https://www.roblox.com/games/5491639616/Another-Obby)
-* `Ezekiel`:
-* `Oreon`:
+* `Marckus`: [Obby](https://www.roblox.com/games/5491503078/the-best-taco), [Battle Royale](https://www.roblox.com/games/5516121246/pug-battle-royale)
+* `Parker`: [Obby](https://www.roblox.com/games/5491510493/Number), [Battle Royale](https://www.roblox.com/games/5510193341/Number)
+* `Dylan`: [Obby](https://www.roblox.com/games/5491639616/Another-Obby), [Battle Royale](https://www.roblox.com/games/5516095260/10-10-Battle-Royale)
+* `Ezekiel`: [Battle Royale](https://www.roblox.com/games/5516097263/Battle-royale)
 
 ## Session 2 Ninjas
 * `Mason`: [Battle Royale](https://www.roblox.com/games/5471339932/pixelmaster0222s-Place-Number-1)
