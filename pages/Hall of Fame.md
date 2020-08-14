@@ -4,10 +4,10 @@ This page is a hall of fame for all of the students who have completed the Roblo
 > 💡 Hint: Click on a student's works to play their completed Roblox Royale games!
 
 ## Session 4 Ninjas
-* `Evan`: [Obby](https://web.roblox.com/games/5535013173/Obby), [Roblox Royale](#)
-* `Airica`: [Obby](https://web.roblox.com/games/5535414744/Place-Number), [Roblox Royale](#)
-* `Airlia`: [Obby](https://www.roblox.com/games/5535372366/Untitled-Game), [Roblox Royale](#)
-* `Zach`: [Obby](https://web.roblox.com/games/5535014931/Roblox-Obby), [Roblox Royale](#)
+* `Evan`: [Obby](https://web.roblox.com/games/5535013173/Obby), [Roblox Royale](https://www.roblox.com/games/5559932293/War-Noob-V-S-S-W-A-T)
+* `Airica`: [Obby](https://web.roblox.com/games/5535414744/Place-Number), [Roblox Royale](https://www.roblox.com/games/5559981434/Forest-Survival)
+* `Airlia`: [Obby](https://www.roblox.com/games/5535372366/Untitled-Game), [Roblox Royale](https://www.roblox.com/games/5559956457/The-Forest)
+* `Zach`: [Obby](https://web.roblox.com/games/5535014931/Roblox-Obby), [Roblox Royale](https://www.roblox.com/games/5559908306/Final-Test-Roblox-Royale-Simple-FPS-FFA-Battle)
 
 ## Session 3 Ninjas
 * `Marckus`: [Obby](https://www.roblox.com/games/5491503078/the-best-taco), [Battle Royale](https://www.roblox.com/games/5516121246/pug-battle-royale)
