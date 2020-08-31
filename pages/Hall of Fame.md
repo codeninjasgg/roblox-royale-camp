@@ -3,6 +3,11 @@ This page is a hall of fame for all of the students who have completed the Roblo
 
 > 💡 Hint: Click on a student's works to play their completed Roblox Royale games!
 
+## Session 5 Ninjas
+* `Logan`: [Obby](https://web.roblox.com/games/5637382944/Obby)
+* `Daniel`: [Obby](https://web.roblox.com/games/5637519811/Only-the-best)
+* `Ethan`: [Obby](https://www.roblox.com/games/5637516866/this-game-is-bad-dont-play)
+
 ## Session 4 Ninjas
 * `Evan`: [Obby](https://web.roblox.com/games/5535013173/Obby), [Roblox Royale](https://www.roblox.com/games/5559932293/War-Noob-V-S-S-W-A-T)
 * `Airica`: [Obby](https://web.roblox.com/games/5535414744/Place-Number), [Roblox Royale](https://www.roblox.com/games/5559981434/Forest-Survival)
