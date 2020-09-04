@@ -4,9 +4,10 @@ This page is a hall of fame for all of the students who have completed the Roblo
 > 💡 Hint: Click on a student's works to play their completed Roblox Royale games!
 
 ## Session 5 Ninjas
-* `Logan`: [Obby](https://web.roblox.com/games/5637382944/Obby)
-* `Daniel`: [Obby](https://web.roblox.com/games/5637519811/Only-the-best)
-* `Ethan`: [Obby](https://www.roblox.com/games/5637516866/this-game-is-bad-dont-play)
+* `Logan`: [Obby](https://web.roblox.com/games/5637382944/Obby), [Roblox Royale](https://www.roblox.com/games/5641255668/FamilyFunAndGames49s-Place-Number-6?refPageId=eed247d1-090a-4bac-9804-b6617c0f3830)
+* `Daniel`: [Obby](https://web.roblox.com/games/5637519811/Only-the-best), [Roblox Studio](https://www.roblox.com/games/5651808119/WAR)
+* `Ethan`: [Obby](https://www.roblox.com/games/5637516866/this-game-is-bad-dont-play), [Roblox Royale](https://www.roblox.com/games/5651690816/The-Battle-Royal)
+* `Zidaan`: [Roblox Royale](https://www.roblox.com/games/5651685671/Areana-Simulator)
 
 ## Session 4 Ninjas
 * `Evan`: [Obby](https://web.roblox.com/games/5535013173/Obby), [Roblox Royale](https://www.roblox.com/games/5559932293/War-Noob-V-S-S-W-A-T)
