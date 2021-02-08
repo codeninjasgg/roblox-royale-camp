@@ -47,7 +47,7 @@
   </a>
   <header class="px-4 pt-3 sm:px-6 sm:pt-4">
     <div class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-      Last published 12/12/2020,<br> 8:02:40 PM PST.
+      Last published 2/8/2021,<br> 2:16:02 PM PST.
     </div>
   </header>
 </div>
@@ -109,7 +109,7 @@
   </a>
   <header class="px-4 pt-3 sm:px-6 sm:pt-4">
     <div class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-      Last published 12/12/2020,<br> 8:02:40 PM PST.
+      Last published 2/8/2021,<br> 2:16:02 PM PST.
     </div>
   </header>
 </div>
@@ -207,87 +207,89 @@
 <pre><code class="language-lua">-- Services
 local ServerStorage = game:GetService(&quot;ServerStorage&quot;)
 local Players = game:GetService(&quot;Players&quot;)
-
+ 
 -- Module Scripts
 local moduleScripts = ServerStorage:WaitForChild(&quot;ModuleScripts&quot;)
 local matchManager = require(moduleScripts:WaitForChild(&quot;MatchManager&quot;))
 local gameSettings = require(moduleScripts:WaitForChild(&quot;GameSettings&quot;))
-
+ 
 -- Events
 local events = ServerStorage:WaitForChild(&quot;Events&quot;)
 local matchEnd = events:WaitForChild(&quot;MatchEnd&quot;)
-
+ 
 while true do
     repeat
         wait(gameSettings.intermissionDuration)
         print(&quot;Restarting intermission&quot;)
     until Players.NumPlayers &gt;= gameSettings.minimumPlayers
-
+ 
     print(&quot;Intermission over&quot;)
     wait(gameSettings.transitionTime)
-
+    
     matchManager.prepareGame()
     -- Placeholder wait for the length of the game.
     matchEnd.Event:Wait()
-
-end</code></pre>
+ 
+end
+</code></pre>
 <h3 id="serverstorage--modulescripts--matchmanager"><code>ServerStorage &gt; ModuleScripts &gt; MatchManager</code></h3>
 <pre><code class="language-lua">local MatchManager = {}
-
+ 
 -- Services
 local ServerStorage = game:GetService(&quot;ServerStorage&quot;)
-
+ 
 -- Module Scripts
 local moduleScripts = ServerStorage:WaitForChild(&quot;ModuleScripts&quot;)
 local playerManager = require(moduleScripts:WaitForChild(&quot;PlayerManager&quot;))
 local gameSettings = require(moduleScripts:WaitForChild(&quot;GameSettings&quot;))
 local timer = require(moduleScripts:WaitForChild(&quot;Timer&quot;))
-
+ 
 -- Events
 local events = ServerStorage:WaitForChild(&quot;Events&quot;)
 local matchStart = events:WaitForChild(&quot;MatchStart&quot;)
 local matchEnd = events:WaitForChild(&quot;MatchEnd&quot;)
-
+ 
 -- Creates a new timer object to be used to keep track of match time. 
 local myTimer = timer.new()
-
+ 
 -- Local Functions
 local function timeUp()
     print(&quot;Time is up!&quot;)
 end
-
+ 
 local function startTimer()
     print(&quot;Timer started&quot;)
     myTimer:start(gameSettings.matchDuration)
     myTimer.finished:Connect(timeUp)    
 end
-
+ 
 -- Module Functions
 function MatchManager.prepareGame()
     playerManager.sendPlayersToMatch()
     matchStart:Fire()
 end
-
+ 
 matchStart.Event:Connect(startTimer)
-
-return MatchManager</code></pre>
+ 
+return MatchManager
+</code></pre>
 <h3 id="serverstorage--modulescripts--timer"><code>ServerStorage &gt; ModuleScripts &gt; Timer</code></h3>
 <pre><code class="language-lua">local Timer = {}
 Timer.__index = Timer
-
+ 
 function Timer.new()
     local self = setmetatable({}, Timer)
-
+ 
     self._finishedEvent = Instance.new(&quot;BindableEvent&quot;)
     self.finished = self._finishedEvent.Event
-
+    
     self._running = false
     self._startTime = nil
     self._duration = nil
-
+    
     return self
 end
-
+ 
 function Timer:start(duration)
     if not self._running then
         local timerThread = coroutine.wrap(function()
@@ -308,7 +310,7 @@ function Timer:start(duration)
         warn(&quot;Warning: timer could not start again as it is already running.&quot;)
     end
 end
-
+ 
 function Timer:getTimeLeft()
     if self._running then
         local now = tick()
@@ -321,16 +323,17 @@ function Timer:getTimeLeft()
         warn(&quot;Warning: could not get remaining time, timer is not running.&quot;)
     end
 end
-
+ 
 function Timer:isRunning()
     return self._running
 end
-
+ 
 function Timer:stop()
     self._running = false
 end
-
-return Timer</code></pre>
+ 
+return Timer
+</code></pre>
 <hr>
 <p>A complete example project of the scripting we have done in class today can be found <a href="https://education.roblox.com/assets/blt03dc7fe967c0c5f3/battleroyale_lesson4_final.rbxl?disposition=inline">here</a>.</p>
 <h2 id="optional-homework-📄">Optional Homework 📄</h2>
